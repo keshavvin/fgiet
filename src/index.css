@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-50: #eff6ff;
+  --color-primary-100: #dbeafe;
+  --color-primary-500: #1e40af;
+  --color-primary-600: #1e3a8a;
+  --color-primary-700: #172554;
+  --color-accent-400: #fbbf24;
+  --color-accent-500: #f59e0b;
+  --color-accent-600: #d97706;
+  --font-sans: "Poppins", "Inter", system-ui, sans-serif;
+  --font-display: "Poppins", "Inter", system-ui, sans-serif;
+  --font-devanagari: "Noto Sans Devanagari", "Poppins", sans-serif;
+}
+
+/* Beautiful global typography — Poppins everywhere with proper weight hierarchy */
+*,
+*::before,
+*::after {
+  font-family: "Poppins", "Inter", system-ui, sans-serif;
+}
+
+.font-display {
+  font-family: "Poppins", "Inter", system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.font-devanagari {
+  font-family: "Noto Sans Devanagari", "Poppins", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", "Inter", system-ui, sans-serif;
+  font-weight: 400;
+  background: #f8fafc;
+  color: #0f172a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Beautiful heading hierarchy — Poppins with refined weights */
+h1, h4, h5, h6 {
+  font-family: "Poppins", "Inter", system-ui, sans-serif;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+/* h2 and h3 use SemiBold (600) site-wide for a more elegant display weight */
+h2, h3 {
+  font-family: "Poppins", "Inter", system-ui, sans-serif;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+}
+
+/* Buttons & strong UI labels get a slightly heavier weight */
+button, .btn-strong {
+  font-family: "Poppins", "Inter", system-ui, sans-serif;
+}
+
+/* Smaller body text gets medium weight for clarity */
+p, li, span, a, label, input, textarea, select {
+  font-family: "Poppins", "Inter", system-ui, sans-serif;
+}
+
+/* Marquee animation for notices */
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-100%); }
+}
+
+.animate-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.animate-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* Carousel fade — starts almost solid so text never looks washed out */
+@keyframes fade {
+  from { opacity: 0.75; transform: translateY(6px); }
+  to   { opacity: 1;    transform: translateY(0); }
+}
+
+.fade-in {
+  animation: fade 0.55s ease-out;
+}
+
+/* Hero text legibility helpers — stronger drop shadow for tough backgrounds */
+.hero-text-shadow {
+  text-shadow:
+    0 2px 8px rgba(0, 0, 0, 0.65),
+    0 1px 2px rgba(0, 0, 0, 0.45);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e3a8a;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1e40af;
+}
+
+/* Float animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+/* Pulse glow */
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(251, 191, 36, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(251, 191, 36, 0.6); }
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+/* Hide scrollbar for clean look */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Navbar submenu — polished hover with sliding red wash + left accent bar */
+.submenu-link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  padding: 0.65rem 1.1rem 0.65rem 1.35rem;
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+  color: #fff;
+  letter-spacing: 0.01em;
+  overflow: hidden;
+  transition: color 180ms ease, padding-left 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+.submenu-link:last-child {
+  border-bottom: 0;
+}
+
+/* The red wash that slides in from the left on hover */
+.submenu-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #dc2626 0%, #b91c1c 100%);
+  transform: translateX(-101%);
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 0;
+}
+.submenu-link:hover::after,
+.submenu-link:focus-visible::after {
+  transform: translateX(0);
+}
+
+/* The small accent bar that appears on the left edge */
+.submenu-bar {
+  position: absolute;
+  left: 0;
+  top: 25%;
+  bottom: 25%;
+  width: 3px;
+  background: #fbbf24;
+  border-radius: 0 2px 2px 0;
+  opacity: 0;
+  transform: scaleY(0.4);
+  transform-origin: center;
+  transition: opacity 200ms ease, transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  z-index: 1;
+}
+.submenu-link:hover .submenu-bar,
+.submenu-link:focus-visible .submenu-bar {
+  opacity: 1;
+  transform: scaleY(1);
+}
+
+.submenu-link:hover,
+.submenu-link:focus-visible {
+  color: #fff;
+  padding-left: 1.65rem;
+  font-weight: 600;
+  outline: none;
+}
+
+/* Hero banner image enhancement
+   Combines: contrast + saturation boost, sharp rendering hint, and
+   SVG unsharp-mask via convolveMatrix for visibly crisper edges.
+   The SVG filter is defined inline in Hero.jsx (#hero-sharpen). */
+.hero-img {
+  filter:
+    url(#hero-sharpen)
+    contrast(1.08)
+    saturate(1.18)
+    brightness(0.97);
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  will-change: transform, opacity;
+}
+
+/* Ken Burns slow zoom on the active slide for a cinematic feel
+   and to make resolution limitations less perceptible. */
+@keyframes kenburns {
+  0%   { transform: scale(1.04) translate(0, 0); }
+  100% { transform: scale(1.14) translate(-1.5%, 1%); }
+}
+.hero-img-active {
+  animation: kenburns 12s ease-out forwards;
+}
