@@ -34,6 +34,43 @@ export default function App() {
     }
   }, [])
 
+  // Global scroll-triggered reveal animations.
+  // Any element with class `reveal`, `reveal-up`, `reveal-left`, `reveal-right`,
+  // or `reveal-scale` gets `is-visible` added when it scrolls into view.
+  // Optional `data-delay` (ms) applies a stagger.
+  useEffect(() => {
+    const selector = '.reveal, .reveal-up, .reveal-left, .reveal-right, .reveal-scale'
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const delay = entry.target.dataset.delay
+            if (delay) entry.target.style.transitionDelay = `${delay}ms`
+            entry.target.classList.add('is-visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.12, rootMargin: '0px 0px -60px 0px' }
+    )
+
+    const observe = () => {
+      document.querySelectorAll(selector).forEach((el) => {
+        if (!el.classList.contains('is-visible')) observer.observe(el)
+      })
+    }
+    observe()
+
+    // Re-scan when new nodes mount (e.g. modal contents)
+    const mo = new MutationObserver(observe)
+    mo.observe(document.body, { childList: true, subtree: true })
+
+    return () => {
+      observer.disconnect()
+      mo.disconnect()
+    }
+  }, [])
+
   return (
     <div className="min-h-screen bg-slate-50">
       {/* Fully-fixed top: TopBar + Header + Navbar always pinned to the top */}

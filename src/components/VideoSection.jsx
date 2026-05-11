@@ -39,7 +39,7 @@ export default function VideoSection() {
 
       <div className="max-w-7xl mx-auto relative grid lg:grid-cols-12 gap-10 lg:gap-14 items-center">
         {/* Text column */}
-        <div className="lg:col-span-5 text-white">
+        <div className="lg:col-span-5 text-white reveal-left">
           <span className="inline-flex items-center gap-2 text-amber-400 text-xs sm:text-sm font-bold uppercase tracking-widest mb-3">
             <FaYoutube className="text-red-500 text-lg" /> Watch Our Story
           </span>
@@ -83,7 +83,7 @@ export default function VideoSection() {
         </div>
 
         {/* Video column */}
-        <div className="lg:col-span-7">
+        <div className="lg:col-span-7 reveal-right" data-delay="150">
           <div className="relative rounded-2xl overflow-hidden shadow-2xl ring-1 ring-white/10 group">
             {/* 16:9 aspect ratio */}
             <div className="relative w-full aspect-video bg-black">

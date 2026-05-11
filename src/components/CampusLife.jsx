@@ -35,7 +35,7 @@ export default function CampusLife() {
   return (
     <section id="campus" className="py-14 md:py-20 px-4 bg-slate-100">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-10 md:mb-14">
+        <div className="text-center mb-10 md:mb-14 reveal-up">
           <span className="text-amber-600 text-sm font-bold uppercase tracking-widest">Life At Campus</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-blue-950 mt-2" style={{ fontFamily: '"Poppins", "Inter", sans-serif', fontWeight: 600, letterSpacing: '-0.02em' }}>
             Campus Life
@@ -49,7 +49,8 @@ export default function CampusLife() {
           {items.map((it, i) => (
             <div
               key={i}
-              className="bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl group transition-all duration-300 hover:-translate-y-2"
+              data-delay={i * 110}
+              className="reveal-up bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-2xl group transition-all duration-300 hover:-translate-y-2"
             >
               <div className="relative h-44 overflow-hidden">
                 <img

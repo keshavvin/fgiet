@@ -14,26 +14,35 @@ export default function About() {
     <section id="about" className="py-16 md:py-24 px-4">
       <div className="max-w-7xl mx-auto grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
         {/* Image side */}
-        <div className="relative">
-          <div className="rounded-3xl overflow-hidden shadow-2xl">
+        <div className="relative reveal-left">
+          <div className="rounded-3xl overflow-hidden shadow-2xl bg-slate-200">
             <img
-              src="https://images.unsplash.com/photo-1607237138185-eedd9c632b0b?w=900&q=80"
-              alt="FGIET Campus"
-              className="w-full h-[380px] md:h-[500px] object-cover hover:scale-105 transition-transform duration-700"
+              src="/about-fgiet.jpg"
+              alt="Feroze Gandhi Institute of Engineering and Technology, RaeBareli — Main institute building"
+              className="w-full h-[300px] sm:h-[380px] md:h-[450px] lg:h-[500px] object-cover hover:scale-105 transition-transform duration-700"
+              loading="lazy"
+              decoding="async"
+              onError={(e) => {
+                e.currentTarget.src = '/slides/01-institute-building.jpg'
+              }}
             />
           </div>
-          <div className="absolute -bottom-6 -left-2 md:-left-6 bg-white rounded-2xl shadow-xl p-4 md:p-6 max-w-[260px] border-l-4 border-amber-500 animate-float">
-            <p className="text-3xl md:text-4xl font-extrabold text-blue-900">22.5</p>
-            <p className="text-sm font-semibold text-slate-700">Acres of Green Campus</p>
+
+          {/* Floating badge — 22.5 acres */}
+          <div className="absolute -bottom-5 left-2 sm:left-4 md:-left-6 bg-white rounded-2xl shadow-xl p-3 sm:p-4 md:p-6 max-w-[200px] sm:max-w-[240px] md:max-w-[260px] border-l-4 border-amber-500 animate-float">
+            <p className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-blue-900">22.5</p>
+            <p className="text-xs sm:text-sm font-semibold text-slate-700">Acres of Green Campus</p>
           </div>
-          <div className="absolute -top-4 -right-2 md:-right-4 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl shadow-xl p-4 md:p-5 text-white max-w-[200px] hidden sm:block">
-            <p className="text-2xl md:text-3xl font-extrabold">Est. 1995</p>
-            <p className="text-xs md:text-sm">Years of Excellence</p>
+
+          {/* Floating badge — Est. 1995 */}
+          <div className="absolute -top-4 right-2 sm:right-4 md:-right-4 bg-gradient-to-br from-amber-500 to-orange-600 rounded-2xl shadow-xl p-3 sm:p-4 md:p-5 text-white max-w-[160px] sm:max-w-[180px] md:max-w-[200px]">
+            <p className="text-xl sm:text-2xl md:text-3xl font-extrabold">Est. 1995</p>
+            <p className="text-[10px] sm:text-xs md:text-sm">Years of Excellence</p>
           </div>
         </div>
 
         {/* Content side */}
-        <div>
+        <div className="reveal-right" data-delay="150">
           <span className="inline-block text-amber-600 text-sm font-bold uppercase tracking-widest mb-3">
             About FGIET
           </span>

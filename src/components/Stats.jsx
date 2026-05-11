@@ -41,7 +41,7 @@ export default function Stats() {
         backgroundImage: 'radial-gradient(circle at 20% 50%, rgba(251,191,36,0.4) 0%, transparent 50%), radial-gradient(circle at 80% 80%, rgba(99,102,241,0.4) 0%, transparent 50%)'
       }} />
       <div className="max-w-7xl mx-auto relative">
-        <div className="text-center mb-10 md:mb-14">
+        <div className="text-center mb-10 md:mb-14 reveal-up">
           <span className="text-amber-400 text-sm font-bold uppercase tracking-widest">Our Achievements</span>
           <h2 className="text-3xl md:text-4xl font-extrabold text-white mt-2" style={{ fontFamily: '"Poppins", "Inter", sans-serif', fontWeight: 600, letterSpacing: '-0.02em' }}>
             Numbers That Speak
@@ -51,7 +51,8 @@ export default function Stats() {
           {stats.map((s, i) => (
             <div
               key={i}
-              className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 md:p-8 text-center hover:bg-white/10 transition-all hover:-translate-y-1 group"
+              data-delay={i * 120}
+              className="reveal-up bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-5 md:p-8 text-center hover:bg-white/10 transition-all hover:-translate-y-1 group"
             >
               <div className="w-14 h-14 md:w-16 md:h-16 mx-auto rounded-full bg-gradient-to-br from-amber-400 to-orange-500 flex items-center justify-center text-white text-2xl shadow-lg mb-3 group-hover:scale-110 transition">
                 {s.icon}

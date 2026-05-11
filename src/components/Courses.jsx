@@ -13,7 +13,7 @@ export default function Courses() {
   return (
     <section id="courses" className="py-14 md:py-20 px-4">
       <div className="max-w-7xl mx-auto">
-        <div className="text-center mb-10 md:mb-14">
+        <div className="text-center mb-10 md:mb-14 reveal-up">
           <span className="text-amber-600 text-sm font-bold uppercase tracking-widest">Academics</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-extrabold text-blue-950 mt-2" style={{ fontFamily: '"Poppins", "Inter", sans-serif', fontWeight: 600, letterSpacing: '-0.02em' }}>
             Courses We Offer
@@ -27,7 +27,8 @@ export default function Courses() {
           {courses.map((c, i) => (
             <div
               key={i}
-              className="bg-white rounded-2xl p-6 md:p-7 shadow-md hover:shadow-2xl border border-slate-100 hover:border-transparent transition-all duration-300 hover:-translate-y-2 group relative overflow-hidden"
+              data-delay={i * 100}
+              className="reveal-up bg-white rounded-2xl p-6 md:p-7 shadow-md hover:shadow-2xl border border-slate-100 hover:border-transparent transition-all duration-300 hover:-translate-y-2 group relative overflow-hidden"
             >
               <div className={`absolute -right-10 -top-10 w-32 h-32 rounded-full bg-gradient-to-br ${c.color} opacity-10 group-hover:opacity-20 group-hover:scale-150 transition-all duration-500`} />
               <div className={`w-14 h-14 md:w-16 md:h-16 rounded-2xl bg-gradient-to-br ${c.color} text-white flex items-center justify-center text-2xl md:text-3xl mb-5 shadow-md group-hover:scale-110 transition`}>

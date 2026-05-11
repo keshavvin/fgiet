@@ -248,7 +248,7 @@ export default function Notices() {
 
       <div className="max-w-7xl mx-auto grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {/* Notices column */}
-        <div className="lg:col-span-2 bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div className="lg:col-span-2 bg-white rounded-2xl shadow-lg overflow-hidden reveal-up">
           <div className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white px-6 py-4 flex items-center justify-between">
             <h3 className="font-semibold text-lg flex items-center gap-2">
               <FaRegFileAlt /> Notices & Announcements
@@ -293,7 +293,7 @@ export default function Notices() {
         </div>
 
         {/* Upcoming events */}
-        <div className="bg-white rounded-2xl shadow-lg overflow-hidden">
+        <div className="bg-white rounded-2xl shadow-lg overflow-hidden reveal-up" data-delay="150">
           <div className="bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-4 flex items-center justify-between">
             <h3 className="font-semibold text-lg flex items-center gap-2">
               <FaCalendarAlt /> Upcoming Events
