@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useRef, useState } from 'react'
 import { FaBars, FaTimes, FaChevronDown, FaChevronRight, FaHome } from 'react-icons/fa'
 
 const menu = [
@@ -18,9 +18,21 @@ const menu = [
       'Academic Programmes',
       {
         name: 'Admission',
-        items: ['Admission Procedure', 'Eligibility Criteria', 'How to Apply', 'Fee Details']
+        items: ['Required Certificate', 'Admission for MCA']
       },
-      'Departments',
+      {
+        name: 'Departments',
+        items: [
+          'Computer Science & Engineering',
+          'Electronics & Communication',
+          'Electrical Engineering',
+          'Mechanical Engineering',
+          'Civil Engineering',
+          'MCA',
+          'MBA',
+          'Applied Sciences & Humanities'
+        ]
+      },
       'Syllabus',
       'Academic Calendar',
       'Ordinances'
@@ -68,6 +80,35 @@ export default function Navbar() {
   const [active, setActive] = useState(null)
   const [activeSub, setActiveSub] = useState(null)
 
+  // Hover-intent timers — keep menus open briefly while user moves the cursor
+  // between the parent item and the sub-flyout (avoids the "dead zone" bug).
+  const closeMenuTimer = useRef(null)
+  const closeSubTimer = useRef(null)
+
+  const openMenu = (i) => {
+    clearTimeout(closeMenuTimer.current)
+    clearTimeout(closeSubTimer.current)
+    setActive(i)
+    setActiveSub(null)
+  }
+  const scheduleCloseMenu = () => {
+    clearTimeout(closeMenuTimer.current)
+    closeMenuTimer.current = setTimeout(() => {
+      setActive(null)
+      setActiveSub(null)
+    }, 220)
+  }
+
+  const openSub = (j) => {
+    clearTimeout(closeSubTimer.current)
+    clearTimeout(closeMenuTimer.current)
+    setActiveSub(j)
+  }
+  const scheduleCloseSub = () => {
+    clearTimeout(closeSubTimer.current)
+    closeSubTimer.current = setTimeout(() => setActiveSub(null), 220)
+  }
+
   return (
     <nav className="bg-gradient-to-r from-blue-900 to-indigo-900 text-white relative z-30">
       <div className="max-w-7xl mx-auto px-4">
@@ -90,8 +131,8 @@ export default function Navbar() {
             <li
               key={i}
               className="relative group"
-              onMouseEnter={() => { setActive(i); setActiveSub(null) }}
-              onMouseLeave={() => { setActive(null); setActiveSub(null) }}
+              onMouseEnter={() => openMenu(i)}
+              onMouseLeave={scheduleCloseMenu}
             >
               <a
                 href={item.link || '#'}
@@ -102,30 +143,33 @@ export default function Navbar() {
                 {item.items && <FaChevronDown size={8} className="opacity-70" />}
               </a>
 
-              {/* First-level dropdown */}
+              {/* First-level dropdown — NO overflow-hidden so the nested
+                  sub-flyout can extend to the right without being clipped */}
               {item.items && active === i && (
-                <ul className="absolute top-full left-0 bg-slate-800 text-white shadow-2xl ring-1 ring-white/5 rounded-b-xl overflow-hidden min-w-[230px] py-1 border-t-4 border-red-600 fade-in">
+                <ul
+                  className="absolute top-full left-0 text-white shadow-2xl ring-1 ring-white/5 rounded-b-xl min-w-[240px] py-1 border-t-4 border-red-600 fade-in z-50"
+                  style={{ backgroundColor: '#1e293b' }}
+                  onMouseEnter={() => clearTimeout(closeMenuTimer.current)}
+                  onMouseLeave={scheduleCloseMenu}
+                >
                   {item.items.map((s, j) => {
                     if (isString(s)) {
                       return (
                         <li key={j}>
-                          <a
-                            href="#"
-                            className="submenu-link"
-                          >
+                          <a href="#" className="submenu-link">
                             <span className="submenu-bar" aria-hidden="true" />
                             <span className="relative z-10">{s}</span>
                           </a>
                         </li>
                       )
                     }
-                    // Nested submenu
+                    // Nested submenu — uses hover-intent timers + 2px overlap
                     return (
                       <li
                         key={j}
                         className="relative"
-                        onMouseEnter={() => setActiveSub(j)}
-                        onMouseLeave={() => setActiveSub(null)}
+                        onMouseEnter={() => openSub(j)}
+                        onMouseLeave={scheduleCloseSub}
                       >
                         <a
                           href="#"
@@ -136,13 +180,18 @@ export default function Navbar() {
                           <FaChevronRight size={9} className="relative z-10 opacity-80" />
                         </a>
                         {activeSub === j && (
-                          <ul className="absolute top-0 left-full bg-slate-800 text-white shadow-2xl ring-1 ring-white/5 rounded-r-xl overflow-hidden min-w-[220px] py-1 border-l-4 border-red-600 fade-in">
+                          <ul
+                            className="absolute top-0 text-white shadow-2xl ring-1 ring-white/5 rounded-r-xl overflow-hidden min-w-[230px] py-1 border-l-4 border-red-600 fade-in z-50"
+                            style={{ left: 'calc(100% - 2px)', backgroundColor: '#1e293b' }}
+                            onMouseEnter={() => {
+                              clearTimeout(closeSubTimer.current)
+                              clearTimeout(closeMenuTimer.current)
+                            }}
+                            onMouseLeave={scheduleCloseSub}
+                          >
                             {s.items.map((t, k) => (
                               <li key={k}>
-                                <a
-                                  href="#"
-                                  className="submenu-link"
-                                >
+                                <a href="#" className="submenu-link">
                                   <span className="submenu-bar" aria-hidden="true" />
                                   <span className="relative z-10">{t}</span>
                                 </a>

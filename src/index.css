@@ -90,14 +90,16 @@ p, li, span, a, label, input, textarea, select {
   animation-play-state: paused;
 }
 
-/* Carousel fade — starts almost solid so text never looks washed out */
+/* Carousel fade — starts almost solid so text never looks washed out.
+   `forwards` fill mode locks the final state so panels can't end up
+   semi-transparent if the browser interrupts the animation. */
 @keyframes fade {
-  from { opacity: 0.75; transform: translateY(6px); }
+  from { opacity: 0.85; transform: translateY(6px); }
   to   { opacity: 1;    transform: translateY(0); }
 }
 
 .fade-in {
-  animation: fade 0.55s ease-out;
+  animation: fade 0.45s ease-out forwards;
 }
 
 /* Hero text legibility helpers — stronger drop shadow for tough backgrounds */
@@ -264,7 +266,10 @@ p, li, span, a, label, input, textarea, select {
   animation: shimmer 2.4s linear infinite;
 }
 
-/* Navbar submenu — polished hover with sliding red wash + left accent bar */
+/* Navbar submenu — polished hover with sliding red wash + left accent bar.
+   `overflow: hidden` on each link self-clips the red wash so it never
+   leaks outside the link's bounds (matters now that the parent ul does
+   NOT clip overflow — needed so nested sub-flyouts can escape). */
 .submenu-link {
   position: relative;
   display: flex;
@@ -280,6 +285,12 @@ p, li, span, a, label, input, textarea, select {
 }
 .submenu-link:last-child {
   border-bottom: 0;
+}
+/* Match the parent panel's bottom corners on the last link so the red
+   wash stays neatly inside the rounded-b-xl panel */
+li:last-child > .submenu-link {
+  border-bottom-left-radius: 0.65rem;
+  border-bottom-right-radius: 0.65rem;
 }
 
 /* The red wash that slides in from the left on hover */
